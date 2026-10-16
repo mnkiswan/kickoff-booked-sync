@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kickoff Booked Sync · Zoho workflow case study</title>
+<meta name="description" content="When a kickoff is booked in Zoho Bookings, the contact is fetched from Zoho CRM and the booking is written back to the CRM record.">
+<style>
+:root{--bg:#0f1414;--card:#171e1e;--line:#26302f;--text:#eef2f1;--muted:#9aa8a6;--accent:#8ea7ff;--ok:#7fd1a6;--warn:#e8b27a;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f6f8f7;--card:#ffffff;--line:#dbe2e0;--text:#14201e;--muted:#5b6b69;--accent:#3a57d6;--ok:#197a4f;--warn:#9a5b14}}
+:root[data-theme="light"]{--bg:#f6f8f7;--card:#ffffff;--line:#dbe2e0;--text:#14201e;--muted:#5b6b69;--accent:#3a57d6;--ok:#197a4f;--warn:#9a5b14}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 20px 72px}
+.eyebrow{font:12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:14px 0 18px;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.4vw,32px);margin:0 0 14px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:19px;color:var(--muted);max-width:640px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.chip{font:13px var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--muted)}
+a{color:var(--accent)}
+.btn{display:inline-block;margin-top:6px;border:1px solid var(--accent);border-radius:8px;padding:9px 16px;text-decoration:none;font-weight:600}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;margin-bottom:56px}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat .n{font-size:30px;font-weight:700}
+.stat .l{font:12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+section{margin-top:56px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr}}
+.steps{display:grid;gap:12px;counter-reset:s}
+.step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.step .badge{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font:600 15px var(--mono);background:var(--card);border:1px solid var(--line);color:var(--accent)}
+.step h3{margin:2px 0 4px;font-size:17px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+.branch{margin-top:12px;border-left:3px solid var(--warn);padding:10px 14px;background:var(--card);border-radius:0 10px 10px 0;font-size:15px;color:var(--muted)}
+.label{font:12px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+ul.plain{list-style:none;padding:0;margin:0}
+ul.plain li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+ul.plain li:last-child{border-bottom:0}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.proj{display:block;text-decoration:none;color:inherit;transition:border-color .15s}
+.proj:hover{border-color:var(--accent)}
+.proj h3{margin:8px 0 6px;font-size:20px}
+.proj p{color:var(--muted);margin:0 0 12px;font-size:15px}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<div class="eyebrow">Portfolio &middot; Zoho workflow automation</div>
+<header class="hero">
+  <div>
+    <h1>Kickoff Booked Sync</h1>
+    <p class="lead">When a kickoff is booked in Zoho Bookings, the contact is fetched from Zoho CRM and the booking is written back to the CRM record.</p>
+    <div class="chips"><span class="chip">Zoho Bookings</span><span class="chip">Zoho CRM</span></div>
+    <a class="btn" href="https://github.com/mnkiswan/kickoff-booked-sync">View the repository on GitHub &rarr;</a>
+  </div>
+  <div class="card">
+    <div class="label">Flow activity</div>
+    <div class="stats"><div class="stat"><div class="n">1</div><div class="l">Trigger</div></div><div class="stat"><div class="n">2</div><div class="l">CRM steps</div></div><div class="stat"><div class="n">1</div><div class="l">Booking</div></div></div>
+    <p style="margin:14px 0 0;font-size:14px;color:var(--muted)">Shows the structure of the flow. Run counts were not captured for this one.</p>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow">The problem</div>
+  <h2>The calendar and the CRM disagreed</h2>
+  <p class="lead">A kickoff could be booked on the calendar while the CRM record stayed out of date, so the team lost track of when the client was meeting.</p>
+</section>
+
+<section>
+  <div class="eyebrow">How it works</div>
+  <h2>From trigger to finished work</h2>
+  <p class="lead" style="margin-bottom:24px">Trigger: an appointment is booked in Zoho Bookings.</p>
+  <div class="steps">
+<div class="step"><div class="badge">01</div><div><h3>Appointment booked</h3><p>Zoho Bookings sends the booking to the flow.</p></div></div>
+<div class="step"><div class="badge">02</div><div><h3>Fetch the contact</h3><p>The matching contact is looked up in Zoho CRM.</p></div></div>
+<div class="step"><div class="badge">03</div><div><h3>Update the CRM record</h3><p>The CRM module entry is updated with the booking details.</p></div></div>
+</div>
+  
+</section>
+
+<section>
+  <div class="eyebrow">Why it matters for the business</div>
+  <h2>What changes when this runs</h2>
+  <div class="grid2">
+    <div class="card"><h3 style="margin-top:0;font-size:18px">CRM matches the calendar</h3><p style="color:var(--muted);margin:0;font-size:15px">Sales and delivery see the kickoff date in the CRM without checking the calendar.</p></div><div class="card"><h3 style="margin-top:0;font-size:18px">No manual logging</h3><p style="color:var(--muted);margin:0;font-size:15px">Nobody has to copy booking details into the CRM.</p></div><div class="card"><h3 style="margin-top:0;font-size:18px">Better handoffs</h3><p style="color:var(--muted);margin:0;font-size:15px">The record is ready before the kickoff call starts.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Built with</div>
+  <div class="grid2">
+    <div class="card"><div class="label">Zoho apps</div><ul class="plain"><li>Zoho Bookings</li><li>Zoho CRM</li></ul></div>
+    <div class="card"><div class="label">Repository</div><p style="margin:0 0 10px;color:var(--muted)">Source notes, flow explanation and README.</p><a href="https://github.com/mnkiswan/kickoff-booked-sync">github.com/mnkiswan/kickoff-booked-sync</a></div>
+  </div>
+</section>
+
+<footer><span>Kickoff Booked Sync &middot; Zoho Flow case study</span><a href="https://mnkiswan.github.io/zoho-flow-portfolio/">&larr; All workflows</a></footer>
+
+</main>
+</body>
+</html>
